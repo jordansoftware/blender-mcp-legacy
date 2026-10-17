@@ -10,12 +10,6 @@ for users who cannot upgrade to Blender 5.1, such as **macOS Intel (x86_64)** us
 
 **⬇️ [Download `mcp-1.0.3-blender4.5.zip`](https://github.com/jordansoftware/blender-mcp-legacy/releases/latest)**
 
-[English](#english) · [Français](#français)
-
----
-
-## English
-
 ### What is this?
 
 This is a **modified, unofficial** version of the **MCP** add-on for Blender, made by
@@ -81,76 +75,3 @@ No — use the [official add-on](https://www.blender.org/lab/mcp-server/) instea
 ### License
 
 GPL-3.0-or-later, same as the original add-on. See [LICENSE](LICENSE).
-
----
-
-## Français
-
-### De quoi s'agit-il ?
-
-Ceci est une version **modifiée et non officielle** de l'add-on Blender **MCP**, créé par
-**Blender Lab** — <https://www.blender.org/lab/mcp-server/>. L'add-on lance un serveur MCP
-(Model Context Protocol) local dans Blender pour permettre à un client LLM d'interagir
-avec Blender.
-
-L'add-on original (v1.0.3) exige Blender 5.1 ou plus. Cette version abaisse ce prérequis
-pour fonctionner sur **Blender 4.2 à 4.5** — utile par exemple sur les Mac Intel, limités
-à Blender 4.5.
-
-> **Ni affilié à la Blender Foundation / Blender Lab, ni approuvé par eux.**
-> Tout le mérite de l'add-on revient à ses auteurs d'origine. Merci de ne pas signaler
-> à Blender Lab les problèmes liés à cette version.
-
-### Modifications par rapport à la v1.0.3 originale
-
-Le premier commit de ce dépôt contient les fichiers originaux intacts ; le second contient
-toutes les modifications, donc `git diff HEAD~1` les montre précisément.
-
-1. **`blender_manifest.toml`** — `blender_version_min` passé de `"5.1.0"` à `"4.2.0"`.
-2. **`weak_sandbox.py`** — le hook privé `bpy.ops._op_create_function` est lu avec
-   `getattr`. S'il n'existe pas (Blender 4.x), le blocage des opérateurs dangereux est
-   ignoré au lieu de planter, et la restauration correspondante est sautée.
-
-### Versions testées
-
-<!-- TODO : indiquer les versions de Blender / OS testés -->
-- _À compléter._
-
-### Installation
-
-1. Téléchargez [`mcp-1.0.3-blender4.5.zip`](https://github.com/jordansoftware/blender-mcp-legacy/releases/latest) (ou zippez vous-même les fichiers `.py`
-   et `blender_manifest.toml`).
-2. Dans Blender : **Édition > Préférences > Get Extensions**, ouvrez le menu déroulant
-   (en haut à droite) et choisissez **Install from Disk…**, puis sélectionnez le zip.
-3. Dans **Édition > Préférences > System**, activez **Allow Online Access** (l'add-on a
-   besoin de l'accès réseau pour lancer son serveur local).
-
-### Limitation connue
-
-Sous Blender 4.x, le hook privé servant à bloquer les opérateurs dangereux peut ne pas
-exister. Dans ce cas, **le blocage des opérateurs dangereux est probablement inactif** :
-le code exécuté via MCP est moins restreint que sous Blender 5.1+. Ne connectez que des
-clients de confiance.
-
-### FAQ
-
-**Puis-je utiliser l'add-on MCP de Blender sur un Mac Intel ?**
-Oui. Blender 5.x ne prend pas en charge les Mac Intel, et l'add-on officiel exige Blender 5.1+.
-Cette version abaisse le prérequis à Blender 4.2, ce qui permet de l'utiliser avec Blender 4.5 LTS
-sur macOS Intel.
-
-**Fonctionne-t-il sous Windows et Linux avec Blender 4.x ?**
-Les modifications ne dépendent pas de la plateforme : il devrait fonctionner partout où tourne
-Blender 4.2–4.5.
-
-**Comment se fait la connexion ?**
-Comme l'original, l'add-on lance un serveur TCP local (par défaut `localhost:9876`, modifiable
-dans les préférences de l'add-on). Il peut aussi tourner sans interface :
-`blender --background file.blend --command blender_mcp`.
-
-**Faut-il l'utiliser avec Blender 5.1+ ?**
-Non, utilisez plutôt l'[add-on officiel](https://www.blender.org/lab/mcp-server/).
-
-### Licence
-
-GPL-3.0-or-later, comme l'add-on original. Voir [LICENSE](LICENSE).
