@@ -10,7 +10,7 @@ for users who cannot upgrade to Blender 5.1, such as **macOS Intel (x86_64)** us
 
 **⬇️ [Download `mcp-1.0.3-blender4.5.zip`](https://github.com/jordansoftware/blender-mcp-legacy/releases/latest)**
 
-### What is this?
+## What is this?
 
 This is a **modified, unofficial** version of the **MCP** add-on for Blender, made by
 **Blender Lab** — <https://www.blender.org/lab/mcp-server/>. The add-on runs a local
@@ -25,7 +25,7 @@ run Blender versions newer than 4.5.
 > All credit for the add-on goes to its original authors. Please do not report issues
 > with this build to Blender Lab.
 
-### Changes from upstream v1.0.3
+## Changes from upstream v1.0.3
 
 The first commit of this repository contains the untouched upstream files; the second
 commit contains all modifications, so `git diff HEAD~1` shows them exactly.
@@ -35,12 +35,12 @@ commit contains all modifications, so `git diff HEAD~1` shows them exactly.
    `getattr`. If it does not exist (Blender 4.x), blocking of dangerous operators is
    skipped instead of crashing, and the matching restore step is skipped too.
 
-### Tested versions
+## Tested versions
 
 <!-- TODO: list the Blender versions / OS you tested on -->
 - _To be completed._
 
-### Installation
+## Installation
 
 1. Download [`mcp-1.0.3-blender4.5.zip`](https://github.com/jordansoftware/blender-mcp-legacy/releases/latest) (or zip the `.py` files and
    `blender_manifest.toml` yourself).
@@ -49,13 +49,13 @@ commit contains all modifications, so `git diff HEAD~1` shows them exactly.
 3. In **Edit > Preferences > System**, enable **Allow Online Access** (the add-on needs
    network permission to run its local server).
 
-### Known limitation
+## Known limitation
 
 On Blender 4.x the private hook used to block dangerous operators may not exist. In that
 case **dangerous-operator blocking is likely inactive**: code executed through MCP is
 less restricted than on Blender 5.1+. Only connect clients you trust.
 
-### FAQ
+## FAQ
 
 **Can I use the Blender MCP add-on on an Intel Mac?**
 Yes. Blender 5.x does not support Intel Macs, and the official add-on requires Blender 5.1+.
@@ -72,6 +72,6 @@ in the add-on preferences). It can also run headless:
 **Should I use this on Blender 5.1+?**
 No — use the [official add-on](https://www.blender.org/lab/mcp-server/) instead.
 
-### License
+## License
 
 GPL-3.0-or-later, same as the original add-on. See [LICENSE](LICENSE).
