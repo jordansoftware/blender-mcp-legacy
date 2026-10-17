@@ -109,7 +109,11 @@ class WeakSandboxForLLM:
         """
         import bpy.ops as _bpy_ops  # noqa: WPS433
 
-        original = _bpy_ops._op_create_function
+        # Blender 4.x compatibility: this private hook may not exist,
+        # in that case operator blocking is simply skipped.
+        original = getattr(_bpy_ops, "_op_create_function", None)
+        if original is None:
+            return (_bpy_ops, None)
 
         def _filtered_op_create_function(module: str, func: str) -> Any:
             key = "{:s}.{:s}".format(module, func)
@@ -140,7 +144,8 @@ class WeakSandboxForLLM:
     def ops_blocked_restore(saved: tuple[Any, Any]) -> None:
         """Restore the original ``_op_create_function``."""
         bpy_ops_module, original = saved
-        bpy_ops_module._op_create_function = original
+        if original is not None:
+            bpy_ops_module._op_create_function = original
 
     # -------------------------------------------------------------------------
     # Context manager
